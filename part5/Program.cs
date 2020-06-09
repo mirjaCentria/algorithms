@@ -5,49 +5,47 @@ namespace part5
     class Program
     {
         static void Main(string[] args)
-        {  /*
-          Node n1 = new Node(3, null, null);
-          Node n2 = new Node(7, null, n1);
-          Node n3 = new Node(2, null, n2);
-          Node n4 = new Node(5, null, n3);
+        {    
+            /* 5e2
+            Connectivity c = new Connectivity(6);
+            c.AddConnection(1,2);
+            c.AddConnection(2,3);
+            c.AddConnection(1,3);
+            c.AddConnection(3,4);            
+            c.AddConnection(5,6);
+          //  Console.WriteLine(c.ToString());
+            Console.WriteLine(c.Calculate(1)); // 3*/
 
-          n1.next = n2;
-          n2.next = n3;
-          n3.next = n4;
+            /* 5e3
+            Components k = new Components(6);
+            k.AddConnection(1,2);
+            k.AddConnection(2,3);
+            k.AddConnection(1,3);
+            k.AddConnection(3,4);
+            k.AddConnection(5,6);
+            Console.WriteLine(k.Calculate()); // 2 */
 
-          Node n = n1;
-          while (n != null)
-          {
-            Console.WriteLine(n.value);
-            n = n.next;
-          }*/
+            /* 5e4
+            Communication com = new Communication(6);
+            com.AddConnection(1, 2);
+            com.AddConnection(2, 3);
+            com.AddConnection(1, 3);
+            com.AddConnection(3, 4);
+            com.AddConnection(5, 6);
+            Console.WriteLine(com.Examine(1, 4)); // true
+            Console.WriteLine(com.Examine(2, 5)); // false
+            Console.WriteLine(com.Examine(5, 6)); // true.*/
 
-        LinkedList ll = new LinkedList();
-        ll.AddFirst(1);
-        System.Console.WriteLine(ll.ToString());
-        ll.AddFirst(2);
-        System.Console.WriteLine(ll.ToString());
-           ll.AddFirst(3);
-        System.Console.WriteLine(ll.ToString());
+                 Labyrinth l = new Labyrinth();
+            char[,] c =
+            { 
+            {'#','#','#','#','#','#','#'},
+            {'#','x','#','.','y','.','#'},
+            {'#','.','#','.','#','.','#'},
+            {'#','.','.','.','.','.','#'},
+            {'#','#','#','#','#','#','#'} };
+            Console.WriteLine(l.Search(c)); // DDRRUUR
 
-               
-        ll.AddLast(4);
-        System.Console.WriteLine(ll.ToString());
-        ll.AddLast(5);
-        System.Console.WriteLine(ll.ToString());
-           ll.AddLast(6);
-        System.Console.WriteLine(ll.ToString());
-/*
-/*
-       System.Console.WriteLine(ll.first.value);
-       System.Console.WriteLine(ll.first.next.value);
-       System.Console.WriteLine(ll.first.next.next.value);
-        System.Console.WriteLine(ll.last.previous.previous.value);
- System.Console.WriteLine(ll.last.previous.value);
- System.Console.WriteLine(ll.last.value);*/
- 
-
-   
         }
 
     }
