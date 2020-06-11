@@ -1,56 +1,83 @@
 namespace part4
 {
   using System;
- 
-  public class Order //with the following method:
-  {
 
-    public Order()
+public class Order
+{
+    int[] preOrder;
+    int[] inOrder;
+    int[] result;
+    int[] NodeLocationInOrder;
+
+    public Order() {}
+
+    public int[] Create(int[] a, int[] b) 
     {
-      /*
-      Pre-order: First handle the root, then the left subtree, then the right subtree
-      In-order: First handle the left subtree, then the root, then the right subtree
-      Post-order: First handle the left subtree, then the right subtree, then the root*/
+        this.preOrder = a;
+        this.inOrder = b;
+        int n = preOrder.Length;
+        result = new int[n];
 
-      /* root1 =  a[0] 
-bleft < root< bright
-root = 4
-left1 = 2 < 4 < right1 = 1 =root2
-left2 = 3 < I = ROOT2 < right  5 
-23514
-root = a0 >> clast
-while left = xb<root 
-while right = xb >root
-rekursio left >> root2 left2 right2 ..... return left(left right root)
-rekursio rigth >>  root left right ... return rigth(left right root)*/
+        NodeLocationInOrder = new int[n + 1];
+        for (int i = 0; i < n; i++) 
+        {
+            NodeLocationInOrder[inOrder[i]] = i;
+        }
+        FormPostOrder(0, n - 1, n, n - 1, n, n - 1);
+        return result;
     }
 
-    public int[] Create(int[] a, int[] b)  //, which returns the post-order of the nodes.
-    { 
-      int i;
-      int ll = a.Length;
-      int root = a[0];
-      
-      int[] c = new int[ll]; 
-      c[ll] = root; 
-      int[] left = new int[ll];
-      int[] right = new int[ll];
-      
-      for(i = 1; i < ll; i++)
-      {
-        if(b[i] == root) break;
-        left[i] = b[i];
-      }
-      Array.Resize(ref left,ll-i);
-      b.CopyTo(right, i +1);
+    public void FormPostOrder(int pOFirst, int pOLast, int iOFirst, int iOLast, int poOFirst, int poOLast)
+    {
+        if (pOFirst > pOLast) return;
+        int root = preOrder[pOFirst];
+        result[pOLast] = root;
+        int location = NodeLocationInOrder[root];
+        int amount = location - iOFirst;
+        FormPostOrder(pOFirst + 1, pOFirst + 1 + amount - 1, iOFirst, iOFirst + amount - 1, poOFirst, poOFirst + amount - 1);
+        FormPostOrder(pOFirst + 1 + amount, pOLast, location + 1, iOLast, poOFirst + amount, poOLast - 1);
+    }     
+}
 
-      
-      return c;
+public class TreeNode
+{
+    private int value;
+    public TreeNode leftChild;
+
+    public TreeNode rightChild;
+
+    public TreeNode(int value)
+    {
+        this.value = value;
+        this.leftChild = null;
+        this.rightChild = null;
     }
 
-
-    public int[] Divide(int )
-  }
-
+    public void AddChild(int value)
+    {
+        if (value < this.value)
+        {
+            if (this.leftChild == null) 
+            {
+                this.leftChild = new TreeNode(value);
+            }
+            else
+            {
+                this.leftChild.AddChild(value);
+            }
+        }
+        else if (value > this.value)
+        {
+            if (this.rightChild == null)
+            {
+                this.rightChild = new TreeNode(value);
+            }
+            else
+            {
+                this.rightChild.AddChild(value);
+            }
+        }
+      }  
+    }
 }
  

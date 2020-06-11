@@ -2,61 +2,32 @@ namespace part4
 {
   using System;
   using System.Text;
+  using System.Collections.Generic;
   
   public class SmallestDistance
   {
-    CNode head;
-    int sum = 0;
-    public void Add(int x)
-    {
-      if(head == null)    
+      private List<int> numbers;
+      public SmallestDistance() 
       {
-      sum += x;
-      head = new CNode(x, null);
-     // head.next = head;
+          numbers = new List<int>();
       }
-      else
+
+      public void Add(int x) 
       {
-        CNode newn = new CNode(x, head.next);
-        head.next = newn;
+          this.numbers.Add(x);
       }
-    
-    }
-    public int Calculate()  //: returns the smallest distance between two integers.
-    {
-      int dist = sum;
-      int diff = 0;
-      CNode nn = head;
-      CNode mm = head.next;
-      while(nn != null)
+
+      public int Calculate() 
       {
-        while(mm != null)
-        {         
-         diff = Math.Abs(mm.value - nn.value);
-         if(diff < dist) dist = diff;
-         mm = mm.next;
-        }
-        nn = nn.next;
+          this.numbers.Sort();
+          int diff = this.numbers[1] - this.numbers[0];
+          for (int i = 1; i < this.numbers.Count; i++) 
+          {
+              int currdiff = this.numbers[i] - this.numbers[i - 1];
+              if (currdiff < diff) diff = currdiff;
+          }
+          return diff;
       }
-      return dist; 
-    }
-
-
-
-    public override string ToString()
-    {   
-      StringBuilder sb = new StringBuilder();
-      CNode nn = head;      
-
-      while(nn != null)
-      {
-        sb.Append(nn.value);
-        sb.Append(" ");
-        nn = nn.next;      
-      }
-      return sb.ToString();
-    } 
- 
   }
 
 } 

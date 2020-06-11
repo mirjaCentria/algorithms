@@ -2,84 +2,31 @@ namespace part4
 {
   using System;
   using System.Text;
- 
- 
-public class CNode
-{
-  public int value;
-  public CNode next;
 
-  public CNode(int value, CNode next) 
-  {
-    this.value = value;
-    this.next = next;
-  }
+
+public class CircleGame
+{   
+    public int Last(int n)
+    {
+        if(n == 1) return 1;
+        if (n % 2 == 0) return 2 * Last(n / 2) - 1;
+        else return 2 * Last((n - 1) / 2) + 1;
+     }
+
 }
 
-  public class CircleGame
-  {
-    public CNode head;
-    public CircleGame(){}
-
-    public int Last(int n)
-    {      
-      for(int i = n; i > 0; i--)
-      {
-        AddFirst(i);
-      }    
-      CNode nn = head.next;
-      while(nn.next != nn)
-      {
-        Remove(nn.next);
-        nn = nn.next;        
-      }
-      return nn.value;
-    }
-
-    public void Remove(CNode rm)
+public class CircleGame2
+{
+    public int Last2(int n)
     {
-      CNode nn = head;
-      while(nn.next != rm)
-      {
-        nn = nn.next; 
-      }
-      nn.next = rm.next;
+        return Josephus(n,2);
     }
 
-    public void AddToEmpty(int n)
+    private int Josephus(int n, int k) 
     {
-      if(head == null) 
-      {
-      head = new CNode(n, null);
-      head.next = head;
-      }
+        if (n == 1) return 1;
+        else return (Josephus(n - 1, k) + k - 1)% n + 1;
     }
-
-    public void AddFirst(int n)
-    {
-      if(head == null)  AddToEmpty(n);
-      else
-      {
-        CNode newn = new CNode(n, head.next);
-        head.next = newn;
-      }
-    }
- 
-    public override string ToString()
-    {   
-      StringBuilder sb = new StringBuilder();
-      CNode nn = head.next;
-      int n = head.value;
-
-      for(int i = 0; i < n + 3; i++)
-      {
-        sb.Append(nn.value);
-        sb.Append(" ");
-        nn = nn.next;      
-      }
-      return sb.ToString();
-    } 
- 
-  }
+}
 
 } 
