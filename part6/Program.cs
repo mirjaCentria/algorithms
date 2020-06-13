@@ -5,17 +5,26 @@ namespace part6
     public class Program 
     {
         static void Main(string[] args)
-    {
-        ShortestPath s = new ShortestPath(5);
-        Console.WriteLine(s.ToString());
-        s.AddRoad(1, 2, 7);
-        s.AddRoad(2, 4, 2); 
-        s.AddRoad(1, 3, 6);
-        s.AddRoad(3, 4, 5);
-        s.AddRoad(4, 5, 3);
-        Console.WriteLine(s.ToString()); //1 2 5  1 3 1  2 4 3  3 2 2  4 3 4  
-        Console.WriteLine(s.Calculate(1, 5)); // 12
-    }
+        {
+            BellmanFord bf1 = new BellmanFord(5);
+            bf1.AddRoad(1, 2, 7);
+            bf1.AddRoad(2, 4, 2);
+            bf1.AddRoad(1, 3, 6);
+            bf1.AddRoad(3, 4, 5);
+            bf1.AddRoad(4, 5, 3);
+            Console.WriteLine(bf1.Calculate(1, 5));
+         //   Console.WriteLine(bf1.ToString()); //1 2 5  1 3 1  2 4 3  3 2 2  4 3 4 
+            
+            
+            FloydWarshall fw = new FloydWarshall(5);
+            fw.AddRoad(1, 2, 7);
+            fw.AddRoad(2, 4, 2); 
+            fw.AddRoad(1, 3, 6);
+            fw.AddRoad(3, 4, 5);
+            fw.AddRoad(4, 5, 3);
+         //   Console.WriteLine(fw.ToString()); //1 2 5  1 3 1  2 4 3  3 2 2  4 3 4  
+            Console.WriteLine(fw.Calculate(1, 5)); // 12
+        }
     }
 
 }

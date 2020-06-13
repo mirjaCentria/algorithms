@@ -19,13 +19,13 @@ namespace part6
  *  
  */
 
-    public class ShortestPath
+    public class FloydWarshall
     {    
       public int[,] distance;
       private int infinitely; // = int.MaxValue;
 
-      public ShortestPath(int n)
-    {
+      public FloydWarshall(int n)
+      {
         infinitely = n * n; //int.MaxValue;
         distance = new int[n +1, n+1];
         for (int i = 0; i < n+1; i++) 
@@ -40,17 +40,15 @@ namespace part6
         {
             distance[i, i] = 0;
         }
-
-
-    }
+      }
 
       public void AddRoad(int a, int b, int d) //Adds a road between cities a and b, with the distance d
-    {
+      {
         distance[a, b] = d;
-    }
+      }
 
       public void FindAll()
-    {
+      {
         int n = distance.GetLength(0);
         for (int k = 1; k < n; k++)
         {
@@ -62,18 +60,18 @@ namespace part6
                 }
             }
         } 
-    }
+      }
 
       public int Calculate(int x, int y)
-    {
-    FindAll();
-    int result = distance[x, y];
-    if ((result == 0) || (result == infinitely)) return -1;
-    else return result;
-    }
+      {
+        FindAll();
+        int result = distance[x, y];
+        if ((result == 0) || (result == infinitely)) return -1;
+        else return result;
+      }
            
       public override string ToString() 
-    {
+      {
         string result = "";
         for (int i = 0; i < distance.GetLength(0); i++) 
         {
@@ -85,7 +83,7 @@ namespace part6
             result += "\n";
         }
         return result;
-    }
+      }
     }
   }
 
