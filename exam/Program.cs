@@ -45,7 +45,7 @@ namespace exam
             f.AddConnection("helsinki", "turku", 500);
             f.AddConnection("turku", "vaasa", 700);
             Console.WriteLine(f.RoutePrice("helsinki","vaasa")); // 1200
-            Console.WriteLine(f.ToString());
+           // Console.WriteLine(f.ToString());
         }
     }
 }
